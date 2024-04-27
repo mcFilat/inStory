@@ -51,18 +51,31 @@ android {
 
 dependencies {
     // Layout
-    implementation("androidx.appcompat:appcompat:1.1.0")
-    implementation("androidx.constraintlayout:constraintlayout:1.1.3")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     // Networking
-    implementation("com.squareup.moshi:moshi-kotlin:1.9.2")
-    implementation("com.squareup.moshi:moshi-kotlin-codegen:1.9.2")
+//    implementation("com.squareup.moshi:moshi-kotlin:1.9.2")
+//    implementation("com.squareup.moshi:moshi-kotlin-codegen:1.9.2")
 
-    implementation("com.squareup.retrofit2:retrofit:2.7.2")
-    implementation("com.squareup.retrofit2:converter-moshi:2.7.2")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.2.2")
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    //implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
-    implementation("androidx.compose.material:material:1.6.5")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+
+    implementation("androidx.compose.material:material:1.6.6")
+
+    // Compose Nav Destinations
+    implementation("io.github.raamcosta.compose-destinations:core:1.1.2-beta")
+    implementation("io.github.raamcosta.compose-destinations:ksp:1.1.2-beta")
+
+//    implementation("com.squareup.picasso:picasso:2.8")
+    implementation("io.coil-kt:coil-compose:2.4.0")
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

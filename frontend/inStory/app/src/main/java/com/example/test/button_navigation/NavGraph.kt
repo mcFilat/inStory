@@ -9,7 +9,10 @@ import androidx.navigation.compose.composable
 fun NavGraph(
     navHostController: NavHostController
 ) {
-    NavHost(navController = navHostController, startDestination = "albums_screen"){
+    NavHost(navController = navHostController, startDestination = "authenticate_screen"){
+        composable("authenticate_screen"){
+            AuthScreen( navHostController )
+        }
         composable("users_screen"){
             UsersScreen()
         }
