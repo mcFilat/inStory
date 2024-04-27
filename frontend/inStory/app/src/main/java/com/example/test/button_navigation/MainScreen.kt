@@ -12,7 +12,9 @@ fun MainScreen() {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = {
-            BottomNavigation(navController = navController)
+            BottomNavigation(
+                navController = navController
+            )
         },
     ) {
         NavGraph(navHostController = navController)

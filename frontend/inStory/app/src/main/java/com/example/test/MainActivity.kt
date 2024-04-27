@@ -52,12 +52,16 @@ import java.nio.file.WatchEvent
 import kotlin.math.log
 
 
-class MainActivity : ComponentActivity() {
+class MainActivity<Account> : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MainScreen()
         }
+    }
+
+    fun reAuthenticate(account: Account) {
+
     }
 }
 
