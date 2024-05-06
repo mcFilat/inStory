@@ -19,6 +19,11 @@ interface MainApi {
     @POST("auth/login")
     suspend fun auth(@Body authRequest: AuthRequest): User
 
+
+    @POST("auth/me")
+    suspend fun checkAuth(
+        @Header("Authorization") token: String
+    ): User
 //    @Headers("Content-Type: application/json")
 //    @POST("auth/products/search")
 //    suspend fun getProductsByNameAuth(@Header("Authorization") token: String,

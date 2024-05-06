@@ -5,21 +5,17 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.example.test.button_navigation.MainScreen
 import com.example.test.ui.theme.TestTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
 
-class MainActivity<Account> : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            TestTheme{
+            TestTheme {
                 MainScreen()
             }
         }
     }
-
-    fun reAuthenticate(account: Account) {
-
-    }
 }
-
-

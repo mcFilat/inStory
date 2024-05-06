@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.compilerKsp)
 }
 
 android {
@@ -40,7 +43,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.0"
+        kotlinCompilerExtensionVersion = "1.5.13"
     }
     packaging {
         resources {
@@ -66,7 +69,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
 
-    implementation("androidx.compose.material:material:1.6.6")
+    implementation("androidx.compose.material:material:1.6.7")
 
     // Compose Nav Destinations
     implementation("io.github.raamcosta.compose-destinations:core:1.1.2-beta")
@@ -74,6 +77,28 @@ dependencies {
 
 //    implementation("com.squareup.picasso:picasso:2.8")
     implementation("io.coil-kt:coil-compose:2.4.0")
+
+    //Dagger - Hilt
+//    implementation("com.google.dagger:hilt-android:2.45")
+//    ksp("com.google.dagger:hilt-android-compiler:2.45")
+
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-compiler:2.51.1")
+
+//    // For instrumentation tests
+//    androidTestImplementation("com.google.dagger:hilt-android-testing:2.51.1")
+//    kaptAndroidTest("com.google.dagger:hilt-compiler:2.51.1")
+//
+//    // For local unit tests
+//    testImplementation("com.google.dagger:hilt-android-testing:2.51.1")
+//    kaptTest("com.google.dagger:hilt-compiler:2.51.1")
+
+
+    ksp("androidx.hilt:hilt-compiler:1.2.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+    implementation("com.squareup.moshi:moshi:1.14.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
 
 
     implementation(libs.androidx.core.ktx)
@@ -93,4 +118,9 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+
+kapt {
+    correctErrorTypes = true
 }
