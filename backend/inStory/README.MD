@@ -33,20 +33,10 @@ This is a REST API for a Pizza delivery service built for fun and learning with 
 | *PUT*    | ```/api/friendships/<int:friendshipid>/approve/```                | _Одобрение входящей заявки на дружбу_                                       |
 | *PUT*    | ```/api/friendships/<int:friendshipid>/reject/```                 | _Отклонение входящей заявки на дружбу_                                      |
 
-## How to run the Project
-- Install Postgreql
-- Install Python
-- Git clone the project with ``` git clone https://github.com/jod35/Pizza-Delivery-API.git```
-- Create your virtualenv with `Pipenv` or `virtualenv` and activate it.
-- Install the requirements with ``` pip install -r requirements.txt ```
-- Create you database with `python manage.py runserver` 
-- Finally run the API 
-``` python manage.py runserver ``
-
 **Авторизация и управление токенами**
 
 **Метод:** POST
-**Endpoint:** /api/auth/login
+**Endpoint:** /api/auth/login/
 **Запрос:**
 ```json
 {
@@ -54,16 +44,16 @@ This is a REST API for a Pizza delivery service built for fun and learning with 
   "password": "secretpassword"
 }
 ```
+
 **Ответ:**
 ```json
 {
-  "auth_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6IlVzZXIgTmFtZSIsImVtYWlsIjoidXNlckBleGFtcGxlLmNvbSJ9.QhLZN-qhxu2Gd_0cNi8i0u_X58Skg3s0o_i2WXbvBYg",
-  "refresh_token": "0x9876543210FEDCBA9876543210FEDCBA"
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6IlVzZXIgTmFtZSIsImVtYWlsIjoidXNlckBleGFtcGxlLmNvbSJ9.QhLZN-qhxu2Gd_0cNi8i0u_X58Skg3s0o_i2WXbvBYg"
 }
 ```
 
 **Метод:** GET
-**Endpoint:** /api/auth/token-verify
+**Endpoint:** /api/auth/token-verify/
 **Заголовки:**
 ```
 Authorization: Bearer <token>
@@ -77,7 +67,7 @@ Authorization: Bearer <token>
 ```
 
 **Метод:** POST
-**Endpoint:** /api/auth/token-renew
+**Endpoint:** /api/auth/token-renew/
 **Заголовки:**
 ```
 Authorization: Bearer <token>
@@ -86,113 +76,14 @@ Authorization: Bearer <token>
 **Ответ:**
 ```json
 {
-  "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6IlVzZXIgTmFtZSIsImVtYWlsIjoidXNlckBleGFtcGxlLmNvbSJ9.QhLZN-qhxu2Gd_0cNi8i0u_X58Skg3s0o_i2WXbvBYg"
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6IlVzZXIgTmFtZSIsImVtYWlsIjoidXNlckBleGFtcGxlLmNvbSJ9.QhLZN-qhxu2Gd_0cNi8i0u_X58Skg3s0o_i2WXbvBYg"
 }
 ```
 
-**Регистрация пользователя**
-
-**Метод:** POST
-**Endpoint:** /api/auth/register
-**Запрос:**
-```json
-{
-  "first_name": "New",
-  "last_name": "User",
-  "username": "newuser",
-  "email": "newuser@example.com",
-  "phone": "+79371707130",
-  "password": "secretpassword"
-}
-```
-**Ответ:**
-```json
-{
-  "id": 2,
-  "first_name": "New",
-  "last_name": "User",
-  "username": "newuser",
-  "email": "newuser@example.com",
-  "phone": "+79371707130"
-}
-```
-
-
-**Альбомы**
-
-**Получение списка альбомов, ассоциированных с идентификатором пользователя**
-
-**Метод:** GET
-**Endpoint:** /api/users/<int:userid>/albums/
-**Заголовки:**
-```
-Authorization: Bearer <token>
-```
-
-**Ответ:**
-```json
-[
-  {
-    "id": 1,
-    "name": "Album 1",
-    "user_id": 1
-  },
-  {
-    "id": 2,
-    "name": "Album 2",
-    "user_id": 1
-  }
-]
-```
-
-**Получение альбома по идентификатору**
-
-**Метод:** GET
-**Endpoint:** /api/albums/<int:albumid>/
-**Заголовки:**
-```
-Authorization: Bearer <token>
-```
-
-**Ответ:**
-```json
-{
-  "id": 1,
-  "name": "Album 1",
-  "description": "This is album 1.",
-  "user_id": 1
-}
-```
-
-**Создание альбома**
-
-**Метод:** POST
-**Endpoint:** /api/albums
-**Заголовки:**
-```
-Authorization: Bearer <token>
-```
-**Запрос:**
-```json
-{
-  "name": "New Album",
-  "description": "This is a new album."
-}
-```
-**Ответ:**
-```json
-{
-  "id": 3,
-  "title": "New Album",
-  "description": "This is a new album.",
-  "creator_id": 1
-}
-```
-
-**Редактирование альбома**
+**Управление пользователями**
 
 **Метод:** PUT
-**Endpoint:** /api/albums/<album_id>
+**Endpoint:** /api/profile/
 **Заголовки:**
 ```
 Authorization: Bearer <token>
@@ -200,139 +91,33 @@ Authorization: Bearer <token>
 **Запрос:**
 ```json
 {
-  "title": "Edited Album",
-  "description": "This is an edited album."
-}
-```
-**Ответ:**
-```json
-{
-  "id": 3,
-  "title": "Edited Album",
-  "description": "This is an edited album.",
-  "creator_id": 1
+  "username": "new_username",
+  "email": "new_email@example.com"
 }
 ```
 
-**Удаление альбома**
+**Ответ:**
+```json
+{
+  "username": "new_username",
+  "email": "new_email@example.com"
+}
+```
 
 **Метод:** DELETE
-**Endpoint:** /api/albums/<album_id>
+**Endpoint:** /api/profile/
 **Заголовки:**
 ```
 Authorization: Bearer <token>
 ```
 
-
-
-**Телеграммы**
-
-**Получение списка телеграмм**
+**Ответ:**
+```
+HTTP 204 No Content
+```
 
 **Метод:** GET
-**Endpoint:** /api/telegrams
-**Заголовки:**
-```
-Authorization: Bearer <token>
-```
-
-**Ответ:**
-```json
-[
-  {
-    "id": 1,
-    "title": "My Telegram",
-    "description": "This is my telegram.",
-    "user_id": 1
-  },
-  {
-    "id": 2,
-    "title": "Another Telegram",
-    "description": "This is another telegram.",
-    "user_id": 1
-  }
-]
-```
-
-**Создание телеграммы**
-
-**Метод:** POST
-**Endpoint:** /api/telegrams
-**Заголовки:**
-```
-Authorization: Bearer <token>
-```
-**Запрос:**
-```json
-{
-  "title": "New Telegram",
-  "description": "This is a new telegram."
-}
-```
-**Ответ:**
-```json
-{
-  "id": 3,
-  "title": "New Telegram",
-  "description": "This is a new telegram.",
-  "user_id": 1
-}
-```
-
-**Редактирование телеграммы**
-
-**Метод:** PUT
-**Endpoint:** /api/telegrams/<telegram_id>
-**Заголовки:**
-```
-Authorization: Bearer <token>
-```
-**Запрос:**
-```json
-{
-  "title": "Edited Telegram",
-  "description": "This is an edited telegram."
-}
-```
-**Ответ:**
-```json
-{
-  "id": 3,
-  "title": "Edited Telegram",
-  "description": "This is an edited telegram.",
-  "user_id": 1
-}
-```
-
-**Удаление телеграммы**
-
-**Метод:** DELETE
-**Endpoint:** /api/telegrams/<telegram_id>
-**Заголовки:**
-```
-Authorization: Bearer <token>
-```
-
-**Ответ:**
-```json
-{
-  "message": "Telegram deleted."
-}
-```
-
-**Ответ:**
-```json
-{
-  "message": "Album deleted."
-}
-```
-
-**Пользователи**
-
-**Получение списка пользователей**
-
-**Метод:** GET
-**Endpoint:** /api/users
+**Endpoint:** /api/users/
 **Заголовки:**
 ```
 Authorization: Bearer <token>
@@ -348,3 +133,469 @@ Authorization: Bearer <token>
   },
   {
     "id": 2,
+    "username": "user2",
+    "email": "user2@example.com"
+  }
+]
+```
+
+**Метод:** GET
+**Endpoint:** /api/users/<int:userid>/friends/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Ответ:**
+```json
+[
+  {
+    "id": 1,
+    "username": "friend1",
+    "email": "friend1@example.com"
+  },
+  {
+    "id": 2,
+    "username": "friend2",
+    "email": "friend2@example.com"
+  }
+]
+```
+
+**Метод:** GET
+**Endpoint:** /api/users/<int:userid>/albums/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Ответ:**
+```json
+[
+  {
+    "id": 1,
+    "title": "Album 1",
+    "description": "This is the first album."
+  },
+  {
+    "id": 2,
+    "title": "Album 2",
+    "description": "This is the second album."
+  }
+]
+```
+
+**Управление альбомами**
+
+**Метод:** GET
+**Endpoint:** /api/albums/<int:albumid>/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Ответ:**
+```json
+{
+  "id": 1,
+  "title": "Album 1",
+  "description": "This is the first album."
+}
+```
+
+**Метод:** POST
+**Endpoint:** /api/albums/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Запрос:**
+```json
+{
+  "title": "New Album",
+  "description": "This is a new album."
+}
+```
+
+**Ответ:**
+```json
+{
+  "id": 3,
+  "title": "New Album",
+  "description": "This is a new album."
+}
+```
+
+**Метод:** PUT
+**Endpoint:** /api/albums/<int:albumid>/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Запрос:**
+```json
+{
+  "title": "Updated Album",
+  "description": "This is an updated album."
+}
+```
+
+**Ответ:**
+```json
+{
+  "id": 1,
+  "title": "Updated Album",
+  "description": "This is an updated album."
+}
+```
+
+**Метод:** DELETE
+**Endpoint:** /api/albums/<int:albumid>/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Ответ:**
+```
+HTTP 204 No Content
+```
+
+**Метод:** GET
+**Endpoint:** /api/albums/<int:albumid>/telegrams/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Ответ:**
+```json
+[
+  {
+    "id": 1,
+    "title": "Telegram 1",
+    "content": "This is the first telegram."
+  },
+  {
+    "id": 2,
+    "title": "Telegram 2",
+    "content": "This is the second telegram."
+  }
+]
+```
+
+**Метод:** GET
+**Endpoint:** /api/albums/<int:albumid>/participants/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Ответ:**
+```json
+[
+  {
+    "id": 1,
+    "username": "participant1",
+    "email": "participant1@example.com"
+  },
+  {
+    "id": 2,
+    "username": "participant2",
+    "email": "participant2@example.com"
+  }
+]
+```
+
+**Метод:** POST
+**Endpoint:** /api/albums/<int:albumid>/participants/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Запрос:**
+```json
+{
+  "user_id": 3
+}
+```
+
+**Ответ:**
+```json
+{
+  "id": 3,
+  "username": "participant3",
+  "email": "participant3@example.com"
+}
+```
+
+**Метод:** DELETE
+**Endpoint:** /api/albums/<int:albumid>/participants/<int:participantid>/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Ответ:**
+```
+HTTP 204 No Content
+```
+
+**Управление телеграммами**
+
+**Метод:** GET
+**Endpoint:** /api/telegrams/<int:telegramid>/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Ответ:**
+```json
+{
+  "id": 1,
+  "title": "Telegram 1",
+  "content": "This is the first telegram."
+}
+```
+
+**Метод:** POST
+**Endpoint:** /api/telegrams/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Запрос:**
+```json
+{
+  "title": "New Telegram",
+  "content": "This is a new telegram."
+}
+```
+
+**Ответ:**
+```json
+{
+  "id": 3,
+  "title": "New Telegram",
+  "content": "This is a new telegram."
+}
+```
+
+**Метод:** PUT
+**Endpoint:** /api/telegrams/<int:telegramid>/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Запрос:**
+```json
+{
+  "title": "Updated Telegram",
+  "content": "This is an updated telegram."
+}
+```
+
+**Ответ:**
+```json
+{
+  "id": 1,
+  "title": "Updated Telegram",
+  "content": "This is an updated telegram."
+}
+```
+
+**Метод:** DELETE
+**Endpoint:** /api/telegrams/<int:telegramid>/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Ответ:**
+```
+HTTP 204 No Content
+```
+
+**Управление заявками на дружбу**
+
+**Метод:** GET
+**Endpoint:** /api/friendships/outgoing/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Ответ:**
+```json
+[
+  {
+    "id": 1,
+    "sender": {
+      "id": 1,
+      "username": "user1",
+      "email": "user1@example.com"
+    },
+    "receiver": {
+      "id": 2,
+      "username": "user2",
+      "email": "user2@example.com"
+    },
+    "status": "pending"
+  },
+  {
+    "id": 2,
+    "sender": {
+      "id": 1,
+      "username": "user1",
+      "email": "user1@example.com"
+    },
+    "receiver": {
+      "id": 3,
+      "username": "user3",
+      "email": "user3@example.com"
+    },
+    "status": "pending"
+  }
+]
+```
+
+**Метод:** GET
+**Endpoint:** /api/friendships/incoming/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Ответ:**
+```json
+[
+  {
+    "id": 3,
+    "sender": {
+      "id": 2,
+      "username": "user2",
+      "email": "user2@example.com"
+    },
+    "receiver": {
+      "id": 1,
+      "username": "user1",
+      "email": "user1@example.com"
+    },
+    "status": "pending"
+  },
+  {
+    "id": 4,
+    "sender": {
+      "id": 3,
+      "username": "user3",
+      "email": "user3@example.com"
+    },
+    "receiver": {
+      "id": 1,
+      "username": "user1",
+      "email": "user1@example.com"
+    },
+    "status": "pending"
+  }
+]
+```
+
+**Метод:** POST
+**Endpoint:** /api/friendships/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Запрос:**
+```json
+{
+  "receiver_id": 2
+}
+```
+
+**Ответ:**
+```json
+{
+  "id": 5,
+  "sender": {
+    "id": 1,
+    "username": "user1",
+    "email": "user1@example.com"
+  },
+  "receiver": {
+    "id": 2,
+    "username": "user2",
+    "email": "user2@example.com"
+  },
+  "status": "pending"
+}
+```
+
+**Метод:** DELETE
+**Endpoint:** /api/friendships/<int:friendshipid>/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Ответ:**
+```
+HTTP 204 No Content
+```
+
+**Метод:** PUT
+**Endpoint:** /api/friendships/<int:friendshipid>/approve/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Ответ:**
+```json
+{
+  "id": 3,
+  "sender": {
+    "id": 2,
+    "username": "user2",
+    "email": "user2@example.com"
+  },
+  "receiver": {
+    "id": 1,
+    "username": "user1",
+    "email": "user1@example.com"
+  },
+  "status": "approved"
+}
+```
+
+**Метод:** PUT
+**Endpoint:** /api/friendships/<int:friendshipid>/reject/
+**Заголовки:**
+```
+Authorization: Bearer <token>
+```
+
+**Ответ:**
+```json
+{
+  "id": 3,
+  "sender": {
+    "id": 2,
+    "username": "user2",
+    "email": "user2@example.com"
+  },
+  "receiver": {
+    "id": 1,
+    "username": "user1",
+    "email": "user1@example.com"
+  },
+  "status": "rejected"
+}
+```
