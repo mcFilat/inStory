@@ -2,16 +2,14 @@ package com.example.test.button_navigation
 
 import android.util.Log
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.test.content.util.AuthScreenViewModel
-import com.example.test.models.LoginViewModel
+import com.example.test.button_navigation.screens.AlbumsScreen
+import com.example.test.button_navigation.screens.AuthScreen
+import com.example.test.button_navigation.screens.ProfileScreen
+import com.example.test.button_navigation.screens.UsersScreen
 import com.example.test.retrofit.MainApi
-//import com.example.test.utils.AuthScreenViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -49,7 +47,7 @@ fun NavGraph(
 
             UsersScreen(mainApi)
         }
-        composable("albums_screen"){navBackStackEntry ->
+        composable("albums_screen"){
 
             AlbumsScreen(mainApi)
         }

@@ -6,14 +6,19 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileScreenViewModel @Inject constructor(
+class UsersScreenViewModel @Inject constructor(
     private val sessionCache: SessionCache
 ): ViewModel() {
 
     val session get() = sessionCache.getActiveSession()
 
-    fun clearSession(){
-        sessionCache.clearSession()
+    fun saveSession(user:User) {
+        sessionCache.saveSession(
+            session = Session(
+                user = user,
+                token = user.token,
+                expiresAt = 12345678910
+            )
+        )
     }
-
 }

@@ -17,6 +17,9 @@
     <uses-permission
         android:name="android.permission.USE_CREDENTIALS"
         android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.READ_APP_OPS"
+        android:maxSdkVersion="22" />
 
     <application
         android:name=".SharingDataApp"

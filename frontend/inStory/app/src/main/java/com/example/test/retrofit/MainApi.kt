@@ -1,5 +1,6 @@
 package com.example.test.retrofit
 
+import com.example.test.retrofit.userlist.UsersData
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -16,6 +17,12 @@ interface MainApi {
         @Path("id") id:Int
     ): Product
 
+    @Headers("Content-Type: application/json")
+    @GET("auth/users")
+    suspend fun getUsersList(
+        @Header("Authorization") token: String,
+    ): List<User>
+
     @POST("auth/login")
     suspend fun auth(@Body authRequest: AuthRequest): User
 
@@ -24,6 +31,8 @@ interface MainApi {
     suspend fun checkAuth(
         @Header("Authorization") token: String
     ): User
+
+
 //    @Headers("Content-Type: application/json")
 //    @POST("auth/products/search")
 //    suspend fun getProductsByNameAuth(@Header("Authorization") token: String,
